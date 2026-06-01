@@ -6,6 +6,7 @@ use std::fmt::Display;
 pub enum HidWrapperError {
     #[allow(dead_code)]
     HidApiError(HidError),
+    HidApiErrorEmpty,
     NoHidDeviceError,
 }
 
@@ -18,6 +19,7 @@ impl Display for HidWrapperError {
             HidWrapperError::NoHidDeviceError => {
                 write!(f, "No Hid Device Found")
             }
+            HidWrapperError::HidApiErrorEmpty => write!(f, "HidApiErrorEmpty"),
         }
     }
 }
@@ -34,6 +36,7 @@ impl From<HidError> for HidWrapperError {
                     HidWrapperError::HidApiError(error)
                 }
             }
+            HidError::HidApiErrorEmpty => HidWrapperError::HidApiErrorEmpty,
             _ => HidWrapperError::HidApiError(error),
         }
     }
