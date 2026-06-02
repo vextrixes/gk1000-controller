@@ -1,5 +1,7 @@
 pkg/
 *.tar
+*.ignored
+ignored/
 
 ### VisualStudioCode template
 .vscode/*
