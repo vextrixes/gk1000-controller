@@ -1,3 +1,5 @@
+use crate::rgb::Rgb;
+
 pub enum KeymapKeys {
     Escape,
     F1,
@@ -109,8 +111,8 @@ pub enum KeymapKeys {
     NumPlus,
 }
 
-impl Into<usize> for KeymapKeys {
-    fn into(self) -> usize {
+impl KeymapKeys {
+    fn to_usize(&self) -> usize {
         match self {
             KeymapKeys::Escape => 1,
             KeymapKeys::F1 => 2,
@@ -221,5 +223,31 @@ impl Into<usize> for KeymapKeys {
             KeymapKeys::NumEnter => 106,
             KeymapKeys::NumPlus => 123,
         }
+    }
+}
+
+pub struct Keymap {
+    map: [[u8; 3]; 144],
+}
+
+impl Default for Keymap {
+    fn default() -> Self {
+        Self { map: [[0; 3]; 144] }
+    }
+}
+
+impl Keymap {
+    pub fn set_key(&mut self, key: KeymapKeys, color: Rgb) {
+        self.map[key.to_usize()] = color.to_array();
+    }
+
+    pub fn set_all_keys(&mut self, color: Rgb) {
+        self.map = [color.to_array(); 144];
+    }
+}
+
+impl Keymap {
+    pub fn map(&self) -> [[u8; 3]; 144] {
+        self.map.clone()
     }
 }

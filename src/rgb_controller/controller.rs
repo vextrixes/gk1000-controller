@@ -1,5 +1,6 @@
 use crate::Effects;
 use crate::HidWrapperError;
+use crate::Keymap;
 use crate::hid_wrapper::HidWrapper;
 
 pub struct RGBController {
@@ -258,6 +259,7 @@ impl RGBController {
 
         Ok(())
     }
+
     pub fn set_static_effect(
         &mut self,
         red: u8,
@@ -678,7 +680,7 @@ impl RGBController {
     pub fn set_static_per_key_effect(
         &mut self,
         brightness: u8,
-        keymap: [[u8; 3]; 144],
+        keymap: Keymap,
     ) -> Result<(), HidWrapperError> {
         self.set_effect(
             Effects::StaticPerKey,
@@ -689,7 +691,7 @@ impl RGBController {
             brightness,
             1,
             0,
-            Some(keymap),
+            Some(keymap.map()),
         )
     }
 }
