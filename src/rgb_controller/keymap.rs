@@ -248,6 +248,6 @@ impl Keymap {
 
 impl Keymap {
     pub fn map(&self) -> [[u8; 3]; 144] {
-        self.map.clone()
+        self.map
     }
 }

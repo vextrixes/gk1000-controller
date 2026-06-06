@@ -1,3 +1,4 @@
+#[derive(Default)]
 pub struct Rgb {
     pub red: u8,
     pub green: u8,
