@@ -1,4 +1,4 @@
-use crate::rgb::Rgb;
+use crate::color::Color;
 
 pub enum KeymapKeys {
     Escape,
@@ -237,11 +237,11 @@ impl Default for Keymap {
 }
 
 impl Keymap {
-    pub fn set_key(&mut self, key: KeymapKeys, color: Rgb) {
+    pub fn set_key(&mut self, key: KeymapKeys, color: Color) {
         self.map[key.to_usize()] = color.to_array();
     }
 
-    pub fn set_all_keys(&mut self, color: Rgb) {
+    pub fn set_all_keys(&mut self, color: Color) {
         self.map = [color.to_array(); 144];
     }
 }
