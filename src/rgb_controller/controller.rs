@@ -207,7 +207,7 @@ impl RGBController {
     pub fn set_effect(
         &mut self,
         effect: Effects,
-        rgb: Color,
+        color: Color,
         full_color: bool,
         brightness: u8,
         speed: u8,
@@ -231,9 +231,9 @@ impl RGBController {
 
         self.hid_wrapper.send_report(&[
             effect.to_u8(),
-            rgb.red,
-            rgb.green,
-            rgb.blue,
+            color.red,
+            color.green,
+            color.blue,
             0,
             0,
             0,
@@ -257,13 +257,13 @@ impl RGBController {
 
     pub fn set_static_effect(
         &mut self,
-        rgb: Color,
+        color: Color,
         brightness: u8,
         full_color: Option<bool>,
     ) -> Result<(), HidWrapperError> {
         self.set_effect(
             Effects::Static,
-            rgb,
+            color,
             full_color.unwrap_or(false),
             brightness,
             1,
@@ -274,14 +274,14 @@ impl RGBController {
 
     pub fn set_single_off_effect(
         &mut self,
-        rgb: Color,
+        color: Color,
         brightness: u8,
         speed: u8,
         full_color: Option<bool>,
     ) -> Result<(), HidWrapperError> {
         self.set_effect(
             Effects::SingleOff,
-            rgb,
+            color,
             full_color.unwrap_or(false),
             brightness,
             speed,
@@ -292,14 +292,14 @@ impl RGBController {
 
     pub fn set_single_on_effect(
         &mut self,
-        rgb: Color,
+        color: Color,
         brightness: u8,
         speed: u8,
         full_color: Option<bool>,
     ) -> Result<(), HidWrapperError> {
         self.set_effect(
             Effects::SingleOn,
-            rgb,
+            color,
             full_color.unwrap_or(false),
             brightness,
             speed,
@@ -310,14 +310,14 @@ impl RGBController {
 
     pub fn set_glittering_effect(
         &mut self,
-        rgb: Color,
+        color: Color,
         brightness: u8,
         speed: u8,
         full_color: Option<bool>,
     ) -> Result<(), HidWrapperError> {
         self.set_effect(
             Effects::Glittering,
-            rgb,
+            color,
             full_color.unwrap_or(false),
             brightness,
             speed,
@@ -328,14 +328,14 @@ impl RGBController {
 
     pub fn set_rain_effect(
         &mut self,
-        rgb: Color,
+        color: Color,
         brightness: u8,
         speed: u8,
         full_color: Option<bool>,
     ) -> Result<(), HidWrapperError> {
         self.set_effect(
             Effects::Rain,
-            rgb,
+            color,
             full_color.unwrap_or(false),
             brightness,
             speed,
@@ -346,14 +346,14 @@ impl RGBController {
 
     pub fn set_colorful_effect(
         &mut self,
-        rgb: Color,
+        color: Color,
         brightness: u8,
         speed: u8,
         full_color: Option<bool>,
     ) -> Result<(), HidWrapperError> {
         self.set_effect(
             Effects::Colorful,
-            rgb,
+            color,
             full_color.unwrap_or(false),
             brightness,
             speed,
@@ -364,14 +364,14 @@ impl RGBController {
 
     pub fn set_breath_effect(
         &mut self,
-        rgb: Color,
+        color: Color,
         brightness: u8,
         speed: u8,
         full_color: Option<bool>,
     ) -> Result<(), HidWrapperError> {
         self.set_effect(
             Effects::Breath,
-            rgb,
+            color,
             full_color.unwrap_or(false),
             brightness,
             speed,
@@ -398,14 +398,14 @@ impl RGBController {
 
     pub fn set_centrifugal_wave_effect(
         &mut self,
-        rgb: Color,
+        color: Color,
         brightness: u8,
         speed: u8,
         full_color: Option<bool>,
     ) -> Result<(), HidWrapperError> {
         self.set_effect(
             Effects::CentrifugalWave,
-            rgb,
+            color,
             full_color.unwrap_or(false),
             brightness,
             speed,
@@ -416,7 +416,7 @@ impl RGBController {
 
     pub fn set_vertical_wave_effect(
         &mut self,
-        rgb: Color,
+        color: Color,
         brightness: u8,
         speed: u8,
         direction: u8,
@@ -424,7 +424,7 @@ impl RGBController {
     ) -> Result<(), HidWrapperError> {
         self.set_effect(
             Effects::VerticalWave,
-            rgb,
+            color,
             full_color.unwrap_or(false),
             brightness,
             speed,
@@ -435,7 +435,7 @@ impl RGBController {
 
     pub fn set_horizontal_wave_effect(
         &mut self,
-        rgb: Color,
+        color: Color,
         brightness: u8,
         speed: u8,
         direction: u8,
@@ -443,7 +443,7 @@ impl RGBController {
     ) -> Result<(), HidWrapperError> {
         self.set_effect(
             Effects::HorizontalWave,
-            rgb,
+            color,
             full_color.unwrap_or(false),
             brightness,
             speed,
@@ -454,14 +454,14 @@ impl RGBController {
 
     pub fn set_rotating_effect(
         &mut self,
-        rgb: Color,
+        color: Color,
         brightness: u8,
         speed: u8,
         full_color: Option<bool>,
     ) -> Result<(), HidWrapperError> {
         self.set_effect(
             Effects::Rotating,
-            rgb,
+            color,
             full_color.unwrap_or(false),
             brightness,
             speed,
@@ -472,14 +472,14 @@ impl RGBController {
 
     pub fn set_explosion_effect(
         &mut self,
-        rgb: Color,
+        color: Color,
         brightness: u8,
         speed: u8,
         full_color: Option<bool>,
     ) -> Result<(), HidWrapperError> {
         self.set_effect(
             Effects::Explosion,
-            rgb,
+            color,
             full_color.unwrap_or(false),
             brightness,
             speed,
@@ -490,14 +490,14 @@ impl RGBController {
 
     pub fn set_launch_effect(
         &mut self,
-        rgb: Color,
+        color: Color,
         brightness: u8,
         speed: u8,
         full_color: Option<bool>,
     ) -> Result<(), HidWrapperError> {
         self.set_effect(
             Effects::Launch,
-            rgb,
+            color,
             full_color.unwrap_or(false),
             brightness,
             speed,
@@ -508,14 +508,14 @@ impl RGBController {
 
     pub fn set_ripples_effect(
         &mut self,
-        rgb: Color,
+        color: Color,
         brightness: u8,
         speed: u8,
         full_color: Option<bool>,
     ) -> Result<(), HidWrapperError> {
         self.set_effect(
             Effects::Ripples,
-            rgb,
+            color,
             full_color.unwrap_or(false),
             brightness,
             speed,
@@ -526,14 +526,14 @@ impl RGBController {
 
     pub fn set_snake_effect(
         &mut self,
-        rgb: Color,
+        color: Color,
         brightness: u8,
         speed: u8,
         full_color: Option<bool>,
     ) -> Result<(), HidWrapperError> {
         self.set_effect(
             Effects::Snake,
-            rgb,
+            color,
             full_color.unwrap_or(false),
             brightness,
             speed,
@@ -544,14 +544,14 @@ impl RGBController {
 
     pub fn set_pulse_effect(
         &mut self,
-        rgb: Color,
+        color: Color,
         brightness: u8,
         speed: u8,
         full_color: Option<bool>,
     ) -> Result<(), HidWrapperError> {
         self.set_effect(
             Effects::Pulse,
-            rgb,
+            color,
             full_color.unwrap_or(false),
             brightness,
             speed,
@@ -562,14 +562,14 @@ impl RGBController {
 
     pub fn set_tilt_effect(
         &mut self,
-        rgb: Color,
+        color: Color,
         brightness: u8,
         speed: u8,
         full_color: Option<bool>,
     ) -> Result<(), HidWrapperError> {
         self.set_effect(
             Effects::Tilt,
-            rgb,
+            color,
             full_color.unwrap_or(false),
             brightness,
             speed,
@@ -580,14 +580,14 @@ impl RGBController {
 
     pub fn set_shuttle_effect(
         &mut self,
-        rgb: Color,
+        color: Color,
         brightness: u8,
         speed: u8,
         full_color: Option<bool>,
     ) -> Result<(), HidWrapperError> {
         self.set_effect(
             Effects::Shuttle,
-            rgb,
+            color,
             full_color.unwrap_or(false),
             brightness,
             speed,
