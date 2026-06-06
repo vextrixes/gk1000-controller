@@ -1,7 +1,7 @@
+use crate::Color;
 use crate::Effects;
 use crate::HidWrapperError;
 use crate::Keymap;
-use crate::Color;
 use crate::hid_wrapper::HidWrapper;
 
 pub struct RGBController {
