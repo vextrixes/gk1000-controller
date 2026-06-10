@@ -346,14 +346,13 @@ impl RGBController {
 
     pub fn set_colorful_effect(
         &mut self,
-        color: Color,
         brightness: u8,
         speed: u8,
         full_color: Option<bool>,
     ) -> Result<(), HidWrapperError> {
         self.set_effect(
             Effects::Colorful,
-            color,
+            Color::default(),
             full_color.unwrap_or(false),
             brightness,
             speed,
