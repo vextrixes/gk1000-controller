@@ -244,7 +244,7 @@ impl Keymap {
         self.map[key.to_usize()] = color.to_array();
     }
 
-    //sets a all key to a color
+    ///sets a all key to a color
     pub fn set_all_keys(&mut self, color: Color) {
         self.map = [color.to_array(); 144];
     }
