@@ -1,5 +1,6 @@
 use crate::color::Color;
 
+/// an Enum to get the id of a key
 pub enum KeymapKeys {
     Escape,
     F1,
@@ -112,6 +113,7 @@ pub enum KeymapKeys {
 }
 
 impl KeymapKeys {
+    /// returns the id of a key
     fn to_usize(&self) -> usize {
         match self {
             KeymapKeys::Escape => 1,
@@ -237,10 +239,12 @@ impl Default for Keymap {
 }
 
 impl Keymap {
+    ///sets a single key to a color
     pub fn set_key(&mut self, key: KeymapKeys, color: Color) {
         self.map[key.to_usize()] = color.to_array();
     }
 
+    //sets a all key to a color
     pub fn set_all_keys(&mut self, color: Color) {
         self.map = [color.to_array(); 144];
     }
