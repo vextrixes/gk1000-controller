@@ -8,6 +8,7 @@ pub struct EffectInfo<'a> {
     can_set_speed: bool,
     can_set_direction: DirectionPolicy,
     can_set_full_color: bool,
+    requires_keymap: bool,
 }
 
 #[allow(dead_code)]
@@ -26,6 +27,7 @@ pub const EFFECTS: [EffectInfo; 20] = [
         can_set_speed: false,
         can_set_direction: DirectionPolicy::None,
         can_set_full_color: true,
+        requires_keymap: false,
     },
     EffectInfo {
         name: "SingleOn",
@@ -34,6 +36,7 @@ pub const EFFECTS: [EffectInfo; 20] = [
         can_set_speed: true,
         can_set_direction: DirectionPolicy::None,
         can_set_full_color: true,
+        requires_keymap: false,
     },
     EffectInfo {
         name: "SingleOff",
@@ -42,6 +45,7 @@ pub const EFFECTS: [EffectInfo; 20] = [
         can_set_speed: true,
         can_set_direction: DirectionPolicy::None,
         can_set_full_color: true,
+        requires_keymap: false,
     },
     EffectInfo {
         name: "Glittering",
@@ -50,6 +54,7 @@ pub const EFFECTS: [EffectInfo; 20] = [
         can_set_speed: true,
         can_set_direction: DirectionPolicy::None,
         can_set_full_color: true,
+        requires_keymap: false,
     },
     EffectInfo {
         name: "Rain",
@@ -58,14 +63,16 @@ pub const EFFECTS: [EffectInfo; 20] = [
         can_set_speed: true,
         can_set_direction: DirectionPolicy::None,
         can_set_full_color: true,
+        requires_keymap: false,
     },
     EffectInfo {
         name: "Colorful",
         effect: Effects::Colorful,
-        can_set_color: true,
+        can_set_color: false,
         can_set_speed: true,
         can_set_direction: DirectionPolicy::None,
-        can_set_full_color: true,
+        can_set_full_color: false,
+        requires_keymap: false,
     },
     EffectInfo {
         name: "Breath",
@@ -74,6 +81,7 @@ pub const EFFECTS: [EffectInfo; 20] = [
         can_set_speed: true,
         can_set_direction: DirectionPolicy::None,
         can_set_full_color: true,
+        requires_keymap: false,
     },
     EffectInfo {
         name: "Spectrum",
@@ -82,6 +90,7 @@ pub const EFFECTS: [EffectInfo; 20] = [
         can_set_speed: true,
         can_set_direction: DirectionPolicy::None,
         can_set_full_color: false,
+        requires_keymap: false,
     },
     EffectInfo {
         name: "CentrifugalWave",
@@ -90,6 +99,7 @@ pub const EFFECTS: [EffectInfo; 20] = [
         can_set_speed: true,
         can_set_direction: DirectionPolicy::None,
         can_set_full_color: true,
+        requires_keymap: false,
     },
     EffectInfo {
         name: "VerticalWave",
@@ -98,6 +108,7 @@ pub const EFFECTS: [EffectInfo; 20] = [
         can_set_speed: true,
         can_set_direction: DirectionPolicy::Vertical23,
         can_set_full_color: true,
+        requires_keymap: false,
     },
     EffectInfo {
         name: "HorizontalWave",
@@ -106,6 +117,7 @@ pub const EFFECTS: [EffectInfo; 20] = [
         can_set_speed: true,
         can_set_direction: DirectionPolicy::Horizontal01,
         can_set_full_color: true,
+        requires_keymap: false,
     },
     EffectInfo {
         name: "Rotating",
@@ -114,6 +126,7 @@ pub const EFFECTS: [EffectInfo; 20] = [
         can_set_speed: true,
         can_set_direction: DirectionPolicy::None,
         can_set_full_color: true,
+        requires_keymap: false,
     },
     EffectInfo {
         name: "Explosion",
@@ -122,6 +135,7 @@ pub const EFFECTS: [EffectInfo; 20] = [
         can_set_speed: true,
         can_set_direction: DirectionPolicy::None,
         can_set_full_color: true,
+        requires_keymap: false,
     },
     EffectInfo {
         name: "Launch",
@@ -130,6 +144,7 @@ pub const EFFECTS: [EffectInfo; 20] = [
         can_set_speed: true,
         can_set_direction: DirectionPolicy::None,
         can_set_full_color: true,
+        requires_keymap: false,
     },
     EffectInfo {
         name: "Ripples",
@@ -138,6 +153,7 @@ pub const EFFECTS: [EffectInfo; 20] = [
         can_set_speed: true,
         can_set_direction: DirectionPolicy::None,
         can_set_full_color: true,
+        requires_keymap: false,
     },
     EffectInfo {
         name: "Snake",
@@ -146,6 +162,7 @@ pub const EFFECTS: [EffectInfo; 20] = [
         can_set_speed: true,
         can_set_direction: DirectionPolicy::None,
         can_set_full_color: true,
+        requires_keymap: false,
     },
     EffectInfo {
         name: "Pulse",
@@ -154,6 +171,7 @@ pub const EFFECTS: [EffectInfo; 20] = [
         can_set_speed: true,
         can_set_direction: DirectionPolicy::None,
         can_set_full_color: true,
+        requires_keymap: false,
     },
     EffectInfo {
         name: "Tilt",
@@ -162,6 +180,7 @@ pub const EFFECTS: [EffectInfo; 20] = [
         can_set_speed: true,
         can_set_direction: DirectionPolicy::None,
         can_set_full_color: true,
+        requires_keymap: false,
     },
     EffectInfo {
         name: "Shuttle",
@@ -170,6 +189,7 @@ pub const EFFECTS: [EffectInfo; 20] = [
         can_set_speed: true,
         can_set_direction: DirectionPolicy::None,
         can_set_full_color: true,
+        requires_keymap: false,
     },
     EffectInfo {
         name: "StaticPerKey",
@@ -178,5 +198,6 @@ pub const EFFECTS: [EffectInfo; 20] = [
         can_set_speed: false,
         can_set_direction: DirectionPolicy::None,
         can_set_full_color: false,
+        requires_keymap: true,
     },
 ];

@@ -198,7 +198,7 @@ impl RGBController {
         Ok(())
     }
 
-    /// Sets an effect
+    /// Sets an effect (set_x_effect should be used instead)
     ///
     /// # Errors
     /// ```HidWrapperError::HidApiError```
