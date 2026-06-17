@@ -1,6 +1,5 @@
 use crate::Effects;
 
-#[allow(dead_code)]
 pub struct EffectInfo<'a> {
     name: &'a str,
     effect: Effects,
@@ -11,14 +10,12 @@ pub struct EffectInfo<'a> {
     requires_keymap: bool,
 }
 
-#[allow(dead_code)]
 pub enum DirectionPolicy {
     None,
     Horizontal01,
     Vertical23,
 }
 
-#[allow(dead_code)]
 pub const EFFECTS: [EffectInfo; 20] = [
     EffectInfo {
         name: "Static",
@@ -201,3 +198,31 @@ pub const EFFECTS: [EffectInfo; 20] = [
         requires_keymap: true,
     },
 ];
+
+pub enum HorizontalDirections {
+    Left,
+    Right,
+}
+
+impl HorizontalDirections {
+    pub fn to_u8(&self) -> u8 {
+        match self {
+            HorizontalDirections::Left => 0,
+            HorizontalDirections::Right => 1,
+        }
+    }
+}
+
+pub enum VerticalDirections {
+    Down,
+    Up,
+}
+
+impl VerticalDirections {
+    pub fn to_u8(&self) -> u8 {
+        match self {
+            VerticalDirections::Down => 2,
+            VerticalDirections::Up => 3,
+        }
+    }
+}

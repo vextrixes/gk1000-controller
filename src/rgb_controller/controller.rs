@@ -39,7 +39,10 @@ impl RGBController {
     /// ```HidWrapperError::NoHidDeviceError```
     fn prepare_device(&mut self) -> Result<(), HidWrapperError> {
         self.hid_wrapper.send_report(&[0x04, 0xab])?;
-        self.hid_wrapper.get_report()?;
+        #[cfg(not(feature = "fast_controller_experimental"))]
+        {
+            self.hid_wrapper.get_report()?;
+        }
 
         self.hid_wrapper.send_report(&[
             0x26, 0x36, 0xf2, 0x27, 0xb7, 0x2a, 0x56, 0x77, 0x98, 0x59, 0x9c, 0x6d, 0x9f, 0xc6,
@@ -54,7 +57,10 @@ impl RGBController {
 
         self.hid_wrapper
             .send_report(&[0x04, 0x13, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x12])?;
-        self.hid_wrapper.get_report()?;
+        #[cfg(not(feature = "fast_controller_experimental"))]
+        {
+            self.hid_wrapper.get_report()?;
+        }
         Ok(())
     }
 
@@ -191,7 +197,10 @@ impl RGBController {
     /// ```HidWrapperError::NoHidDeviceError```
     fn apply_to_device(&mut self) -> Result<(), HidWrapperError> {
         self.hid_wrapper.send_report(&[0x04, 0x02])?;
-        self.hid_wrapper.get_report()?;
+        #[cfg(not(feature = "fast_controller_experimental"))]
+        {
+            self.hid_wrapper.get_report()?;
+        }
 
         self.hid_wrapper.send_report(&[0x04, 0xf0])?;
 
