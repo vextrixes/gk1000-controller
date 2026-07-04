@@ -113,8 +113,8 @@ pub enum KeymapKeys {
 }
 
 impl KeymapKeys {
-    /// returns the id of a key
-    fn to_usize(&self) -> usize {
+    /// returns the id of a key (where to put it in the keymap)
+    pub fn to_usize(&self) -> usize {
         match self {
             KeymapKeys::Escape => 1,
             KeymapKeys::F1 => 2,
