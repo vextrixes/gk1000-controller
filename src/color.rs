@@ -6,7 +6,7 @@ pub struct Color {
 }
 
 impl Color {
-    pub fn to_array(self) -> [u8; 3] {
+    pub fn to_array(&self) -> [u8; 3] {
         [self.red, self.green, self.blue]
     }
 }
