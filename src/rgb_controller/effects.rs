@@ -4,6 +4,8 @@ use Effects::{
     VerticalWave,
 };
 
+use crate::Color;
+
 /// Effects of the keyboard
 pub enum Effects {
     Static,
@@ -54,7 +56,7 @@ impl Effects {
             StaticPerKey => 20,
         }
     }
-    
+
     pub fn from_u8(n: u8) -> Option<Self> {
         match n {
             1 => Some(Static),
@@ -77,7 +79,17 @@ impl Effects {
             18 => Some(Tilt),
             19 => Some(Shuttle),
             20 => Some(StaticPerKey),
-            _ => None
+            _ => None,
         }
     }
+}
+
+pub struct Effect {
+    pub effect: Effects,
+    pub color: Color,
+    pub full_color: bool,
+    pub brightness: u8,
+    pub speed: u8,
+    pub direction: u8,
+    pub keymap: Option<[[u8; 3]; 144]>,
 }
