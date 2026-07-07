@@ -229,6 +229,7 @@ mod tests {
             .expect("error loading from file")
         );
 
+        #[allow(unused_must_use)]
         fs::remove_file("/tmp/test_file.gk1k");
 
     }
