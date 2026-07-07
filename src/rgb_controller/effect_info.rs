@@ -1,15 +1,17 @@
 use crate::Effects;
 
+#[derive(Clone)]
 pub struct EffectInfo<'a> {
-    name: &'a str,
-    effect: Effects,
-    can_set_color: bool,
-    can_set_speed: bool,
-    can_set_direction: DirectionPolicy,
-    can_set_full_color: bool,
-    requires_keymap: bool,
+    pub name: &'a str,
+    pub effect: Effects,
+    pub can_set_color: bool,
+    pub can_set_speed: bool,
+    pub can_set_direction: DirectionPolicy,
+    pub can_set_full_color: bool,
+    pub requires_keymap: bool,
 }
 
+#[derive(PartialEq, Clone)]
 pub enum DirectionPolicy {
     None,
     Horizontal01,

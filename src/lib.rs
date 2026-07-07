@@ -11,6 +11,7 @@ pub use rgb_controller::effect_info::{
     DirectionPolicy, EFFECTS, EffectInfo, HorizontalDirections, VerticalDirections,
 };
 pub use rgb_controller::effects::Effects;
+pub use rgb_controller::preset::Preset;
 
 #[cfg(feature = "access_hid_wrapper")]
 pub use hid_wrapper::HidWrapper;
