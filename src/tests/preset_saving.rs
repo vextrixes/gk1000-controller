@@ -2,8 +2,7 @@
 mod tests {
     use std::collections::VecDeque;
 
-    use crate::Keymap;
-    use crate::Preset;
+    use crate::{Keymap, Preset};
 
     #[test]
     fn test_encode_decode() {
@@ -20,7 +19,7 @@ mod tests {
             0,
             None,
         );
-        let mut buffer: VecDeque<u8> = preset._encode_to_buffer().into();
+        let mut buffer: VecDeque<u8> = preset._encode_to_buffer().expect("error encoding").into();
         assert_eq!(
             preset,
             Preset::_decode_from_buffer(&mut buffer).expect("error decoding")
@@ -39,7 +38,7 @@ mod tests {
             2,
             None,
         );
-        let mut buffer: VecDeque<u8> = preset._encode_to_buffer().into();
+        let mut buffer: VecDeque<u8> = preset._encode_to_buffer().expect("error encoding").into();
         assert_eq!(
             preset,
             Preset::_decode_from_buffer(&mut buffer).expect("error decoding")
@@ -58,7 +57,7 @@ mod tests {
             1,
             None,
         );
-        let mut buffer: VecDeque<u8> = preset._encode_to_buffer().into();
+        let mut buffer: VecDeque<u8> = preset._encode_to_buffer().expect("error encoding").into();
         assert_eq!(
             preset,
             Preset::_decode_from_buffer(&mut buffer).expect("error decoding")
@@ -99,7 +98,7 @@ mod tests {
             0,
             Some(keymap.map()),
         );
-        let mut buffer: VecDeque<u8> = preset._encode_to_buffer().into();
+        let mut buffer: VecDeque<u8> = preset._encode_to_buffer().expect("error encoding").into();
         assert_eq!(
             preset,
             Preset::_decode_from_buffer(&mut buffer).expect("error decoding")
@@ -109,7 +108,8 @@ mod tests {
     #[cfg(target_os = "linux")]
     #[test]
     fn test_save_load() {
-        use std::fs::File;
+        use std::fs::{File};
+        use std::fs;
 
         let preset = Preset::new(
             crate::Effects::Static,
@@ -228,5 +228,8 @@ mod tests {
             )
             .expect("error loading from file")
         );
+
+        fs::remove_file("/tmp/test_file.gk1k");
+
     }
 }

@@ -2,6 +2,7 @@ mod color;
 mod hid_wrapper;
 mod keymap;
 mod rgb_controller;
+#[cfg(test)]
 mod tests;
 
 pub use color::Color;

@@ -1,16 +1,15 @@
-use crate::{
-    DirectionPolicy, EFFECTS, EffectInfo, Effects, Preset,
-};
+use crate::{DirectionPolicy, EFFECTS, EffectInfo, Effects, Preset};
 use std::{
     collections::VecDeque,
     fs::File,
     io::{Read, Write},
-    vec,
 };
 
 #[derive(Debug)]
 pub enum SavePresetError {
     InvalidPreset,
+    FileError(std::io::Error),
+    NoKeymapGiven,
 }
 
 #[derive(Debug)]
@@ -28,11 +27,13 @@ impl Preset {
         if !self.is_valid() {
             return Err(SavePresetError::InvalidPreset);
         }
-        _file.write_all(&self._encode_to_buffer()).expect("");
-        Ok(())
+        match _file.write_all(&self._encode_to_buffer()?) {
+            Err(err) => Err(SavePresetError::FileError(err)),
+            _ => Ok(()),
+        }
     }
 
-    pub(crate) fn _encode_to_buffer(&self) -> Vec<u8> {
+    pub(crate) fn _encode_to_buffer(&self) -> Result<Vec<u8>, SavePresetError> {
         let effect_info: EffectInfo = EFFECTS[usize::from(self.effect.to_u8() - 1)].clone();
         let mut buffer: Vec<u8> = vec![MAGIC_NUMBER_1, MAGIC_NUMBER_2, VERSION];
 
@@ -50,12 +51,12 @@ impl Preset {
         buffer.push(self.brightness);
 
         if effect_info.requires_keymap {
-            for key_color in self.keymap.expect("keymap is Option::None").iter() {
+            for key_color in self.keymap.ok_or(SavePresetError::NoKeymapGiven)?.iter() {
                 buffer.extend(key_color);
             }
         }
 
-        buffer
+        Ok(buffer)
     }
 
     pub fn load_from_file(_file: &mut File) -> Result<Self, LoadPresetError> {
@@ -78,25 +79,24 @@ impl Preset {
             return Err(LoadPresetError::InvalidOrCorruptedFile);
         }
 
-        if buffer.pop_front().expect("") != VERSION {
+        if buffer
+            .pop_front()
+            .ok_or(LoadPresetError::InvalidOrCorruptedFile)?
+            != VERSION
+        {
             return Err(LoadPresetError::InvalidOrCorruptedFile);
             //todo!("TOO BAD, Invalid VERSION")
         }
 
-        if buffer[0] & 128 != 0 {
-            buffer[0] -= 128;
-            save.full_color = true;
-        }
+        let effect_byte = buffer
+            .pop_front()
+            .ok_or(LoadPresetError::InvalidOrCorruptedFile)?;
 
-        let direction: u8 = (buffer[0] >> 5) & 0b11;
-        buffer[0] -= direction * 32;
+        save.full_color = (effect_byte & 0b1000_0000) != 0;
+        let direction: u8 = (effect_byte >> 5) & 0b11;
+        let effect_id: u8 = effect_byte & 0b0001_1111;
 
-        save.effect = Effects::from_u8(
-            buffer
-                .pop_front()
-                .ok_or(LoadPresetError::InvalidOrCorruptedFile)?,
-        )
-        .ok_or(LoadPresetError::InvalidOrCorruptedFile)?;
+        save.effect = Effects::from_u8(effect_id).ok_or(LoadPresetError::InvalidOrCorruptedFile)?;
         let effect_info: EffectInfo = EFFECTS[usize::from(save.effect.to_u8() - 1)].clone();
 
         if !save.full_color && effect_info.can_set_color {
