@@ -1,6 +1,5 @@
 use crate::{
     DirectionPolicy, EFFECTS, EffectInfo, Effects, Preset,
-    save_preset::{LoadPresetError::InvalidOrCorruptedFile, SavePresetError::InvalidPreset},
 };
 use std::{
     collections::VecDeque,
@@ -67,7 +66,7 @@ impl Preset {
 
                 Self::_decode_from_buffer(&mut buffer)
             }
-            Err(err) => return Err(LoadPresetError::OpenFileError(err)),
+            Err(err) => Err(LoadPresetError::OpenFileError(err)),
         }
     }
 

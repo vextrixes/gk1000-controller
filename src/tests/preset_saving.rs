@@ -1,8 +1,8 @@
+#[allow(unused_imports)]
 mod tests {
     use std::collections::VecDeque;
 
     use crate::Keymap;
-    #[allow(unused_imports)]
     use crate::Preset;
 
     #[test]
