@@ -32,6 +32,10 @@ impl Preset {
             keymap,
         }
     }
+
+    pub fn is_valid(&self) -> bool {
+        self.brightness <= 16 && self.direction <= 3 && 1 <= self.speed && self.speed <= 16
+    }
 }
 
 impl Default for Preset {
