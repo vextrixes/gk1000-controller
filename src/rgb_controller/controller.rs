@@ -2,8 +2,8 @@ use crate::Color;
 use crate::Effects;
 use crate::HidWrapperError;
 use crate::Keymap;
+use crate::Preset;
 use crate::hid_wrapper::HidWrapper;
-use crate::rgb_controller::effects::Effect;
 
 pub struct RGBController {
     hid_wrapper: HidWrapper,
@@ -225,7 +225,7 @@ impl RGBController {
         speed: u8,
         direction: u8,
         keymap: Option<[[u8; 3]; 144]>,
-    ) -> Result<Effect, HidWrapperError> {
+    ) -> Result<Preset, HidWrapperError> {
         self.hid_wrapper.open_device()?;
 
         self.prepare_device()?;
@@ -264,7 +264,7 @@ impl RGBController {
 
         self.hid_wrapper.close_device();
 
-        Ok(Effect {
+        Ok(Preset {
             effect,
             color,
             full_color,
@@ -280,7 +280,7 @@ impl RGBController {
         color: Color,
         brightness: u8,
         full_color: Option<bool>,
-    ) -> Result<Effect, HidWrapperError> {
+    ) -> Result<Preset, HidWrapperError> {
         self.set_effect(
             Effects::Static,
             color,
@@ -298,7 +298,7 @@ impl RGBController {
         brightness: u8,
         speed: u8,
         full_color: Option<bool>,
-    ) -> Result<Effect, HidWrapperError> {
+    ) -> Result<Preset, HidWrapperError> {
         self.set_effect(
             Effects::SingleOff,
             color,
@@ -316,7 +316,7 @@ impl RGBController {
         brightness: u8,
         speed: u8,
         full_color: Option<bool>,
-    ) -> Result<Effect, HidWrapperError> {
+    ) -> Result<Preset, HidWrapperError> {
         self.set_effect(
             Effects::SingleOn,
             color,
@@ -334,7 +334,7 @@ impl RGBController {
         brightness: u8,
         speed: u8,
         full_color: Option<bool>,
-    ) -> Result<Effect, HidWrapperError> {
+    ) -> Result<Preset, HidWrapperError> {
         self.set_effect(
             Effects::Glittering,
             color,
@@ -352,7 +352,7 @@ impl RGBController {
         brightness: u8,
         speed: u8,
         full_color: Option<bool>,
-    ) -> Result<Effect, HidWrapperError> {
+    ) -> Result<Preset, HidWrapperError> {
         self.set_effect(
             Effects::Rain,
             color,
@@ -368,7 +368,7 @@ impl RGBController {
         &mut self,
         brightness: u8,
         speed: u8,
-    ) -> Result<Effect, HidWrapperError> {
+    ) -> Result<Preset, HidWrapperError> {
         self.set_effect(
             Effects::Colorful,
             Color::default(),
@@ -386,7 +386,7 @@ impl RGBController {
         brightness: u8,
         speed: u8,
         full_color: Option<bool>,
-    ) -> Result<Effect, HidWrapperError> {
+    ) -> Result<Preset, HidWrapperError> {
         self.set_effect(
             Effects::Breath,
             color,
@@ -402,7 +402,7 @@ impl RGBController {
         &mut self,
         brightness: u8,
         speed: u8,
-    ) -> Result<Effect, HidWrapperError> {
+    ) -> Result<Preset, HidWrapperError> {
         self.set_effect(
             Effects::Spectrum,
             Color::default(),
@@ -420,7 +420,7 @@ impl RGBController {
         brightness: u8,
         speed: u8,
         full_color: Option<bool>,
-    ) -> Result<Effect, HidWrapperError> {
+    ) -> Result<Preset, HidWrapperError> {
         self.set_effect(
             Effects::CentrifugalWave,
             color,
@@ -439,7 +439,7 @@ impl RGBController {
         speed: u8,
         direction: u8,
         full_color: Option<bool>,
-    ) -> Result<Effect, HidWrapperError> {
+    ) -> Result<Preset, HidWrapperError> {
         self.set_effect(
             Effects::VerticalWave,
             color,
@@ -458,7 +458,7 @@ impl RGBController {
         speed: u8,
         direction: u8,
         full_color: Option<bool>,
-    ) -> Result<Effect, HidWrapperError> {
+    ) -> Result<Preset, HidWrapperError> {
         self.set_effect(
             Effects::HorizontalWave,
             color,
@@ -476,7 +476,7 @@ impl RGBController {
         brightness: u8,
         speed: u8,
         full_color: Option<bool>,
-    ) -> Result<Effect, HidWrapperError> {
+    ) -> Result<Preset, HidWrapperError> {
         self.set_effect(
             Effects::Rotating,
             color,
@@ -494,7 +494,7 @@ impl RGBController {
         brightness: u8,
         speed: u8,
         full_color: Option<bool>,
-    ) -> Result<Effect, HidWrapperError> {
+    ) -> Result<Preset, HidWrapperError> {
         self.set_effect(
             Effects::Explosion,
             color,
@@ -512,7 +512,7 @@ impl RGBController {
         brightness: u8,
         speed: u8,
         full_color: Option<bool>,
-    ) -> Result<Effect, HidWrapperError> {
+    ) -> Result<Preset, HidWrapperError> {
         self.set_effect(
             Effects::Launch,
             color,
@@ -530,7 +530,7 @@ impl RGBController {
         brightness: u8,
         speed: u8,
         full_color: Option<bool>,
-    ) -> Result<Effect, HidWrapperError> {
+    ) -> Result<Preset, HidWrapperError> {
         self.set_effect(
             Effects::Ripples,
             color,
@@ -548,7 +548,7 @@ impl RGBController {
         brightness: u8,
         speed: u8,
         full_color: Option<bool>,
-    ) -> Result<Effect, HidWrapperError> {
+    ) -> Result<Preset, HidWrapperError> {
         self.set_effect(
             Effects::Snake,
             color,
@@ -566,7 +566,7 @@ impl RGBController {
         brightness: u8,
         speed: u8,
         full_color: Option<bool>,
-    ) -> Result<Effect, HidWrapperError> {
+    ) -> Result<Preset, HidWrapperError> {
         self.set_effect(
             Effects::Pulse,
             color,
@@ -584,7 +584,7 @@ impl RGBController {
         brightness: u8,
         speed: u8,
         full_color: Option<bool>,
-    ) -> Result<Effect, HidWrapperError> {
+    ) -> Result<Preset, HidWrapperError> {
         self.set_effect(
             Effects::Tilt,
             color,
@@ -602,7 +602,7 @@ impl RGBController {
         brightness: u8,
         speed: u8,
         full_color: Option<bool>,
-    ) -> Result<Effect, HidWrapperError> {
+    ) -> Result<Preset, HidWrapperError> {
         self.set_effect(
             Effects::Shuttle,
             color,
@@ -618,7 +618,7 @@ impl RGBController {
         &mut self,
         brightness: u8,
         keymap: Keymap,
-    ) -> Result<Effect, HidWrapperError> {
+    ) -> Result<Preset, HidWrapperError> {
         self.set_effect(
             Effects::StaticPerKey,
             Color::default(),

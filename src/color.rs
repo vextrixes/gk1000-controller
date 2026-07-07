@@ -1,4 +1,4 @@
-#[derive(Default)]
+#[derive(Default, PartialEq, Debug)]
 pub struct Color {
     pub red: u8,
     pub green: u8,

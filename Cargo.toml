@@ -12,4 +12,5 @@ hidapi = "2.6.6"
 
 [features]
 access_hid_wrapper = []
+preset_file_saving = []
 fast_controller_experimental = []

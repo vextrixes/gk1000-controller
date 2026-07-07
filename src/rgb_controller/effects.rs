@@ -4,10 +4,10 @@ use Effects::{
     VerticalWave,
 };
 
-use crate::Color;
-
 /// Effects of the keyboard
+#[derive(Clone, Default, PartialEq, Debug)]
 pub enum Effects {
+    #[default]
     Static,
     SingleOn,
     SingleOff,
@@ -82,14 +82,4 @@ impl Effects {
             _ => None,
         }
     }
-}
-
-pub struct Effect {
-    pub effect: Effects,
-    pub color: Color,
-    pub full_color: bool,
-    pub brightness: u8,
-    pub speed: u8,
-    pub direction: u8,
-    pub keymap: Option<[[u8; 3]; 144]>,
 }
