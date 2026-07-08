@@ -108,8 +108,8 @@ mod tests {
     #[cfg(target_os = "linux")]
     #[test]
     fn test_save_load() {
-        use std::fs::{File};
-        use std::fs;
+        use std::fs::File;
+        use std::{env, fs};
 
         let preset = Preset::new(
             crate::Effects::Static,
@@ -231,6 +231,5 @@ mod tests {
 
         #[allow(unused_must_use)]
         fs::remove_file("/tmp/test_file.gk1k");
-
     }
 }

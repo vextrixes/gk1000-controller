@@ -29,6 +29,10 @@ impl RGBController {
         })
     }
 
+    /// Returns a boolean to indicate if a device is connected
+    ///
+    ///  /// # Errors
+    /// ```HidWrapperError::*```
     pub fn is_device_connected(&mut self) -> Result<bool, HidWrapperError> {
         self.hid_wrapper.is_device_connected()
     }

@@ -23,6 +23,18 @@ const MAGIC_NUMBER_2: u8 = 0b00010000;
 const VERSION: u8 = 1;
 
 impl Preset {
+    /// Method to save a preset to a file.
+    ///
+    /// # Example
+    /// ```
+    /// let preset = gk1000_controller::Preset::default();
+    /// let mut file = std::fs::File::create("/tmp/file.gk1k").expect("Failed to create");
+    /// preset.save_to_file(&mut file).expect("Failed to Save");
+    /// ```
+    /// Make sure you use a function to create a writable, overridable file.
+    ///
+    /// # Errors
+    /// If this function fails a `SavePresetError` will be returned
     pub fn save_to_file(&self, _file: &mut File) -> Result<(), SavePresetError> {
         if !self.is_valid() {
             return Err(SavePresetError::InvalidPreset);
@@ -33,7 +45,21 @@ impl Preset {
         }
     }
 
-    pub(crate) fn _encode_to_buffer(&self) -> Result<Vec<u8>, SavePresetError> {
+    /// Method to save a preset to a buffer.
+    ///
+    /// This method is not supposed to be used to save presets to a file
+    ///
+    /// # Example
+    /// ```
+    /// let preset = gk1000_controller::Preset::default();
+    /// if preset.is_valid(){
+    /// let buffer = preset._encode_to_buffer().expect("Failed to Encode");
+    /// }
+    /// ```
+    ///
+    /// # Errors
+    /// If this function fails a `SavePresetError` will be returned
+    pub fn _encode_to_buffer(&self) -> Result<Vec<u8>, SavePresetError> {
         let effect_info: EffectInfo = EFFECTS[usize::from(self.effect.to_u8() - 1)].clone();
         let mut buffer: Vec<u8> = vec![MAGIC_NUMBER_1, MAGIC_NUMBER_2, VERSION];
 
@@ -59,6 +85,16 @@ impl Preset {
         Ok(buffer)
     }
 
+    /// Function to load a preset from a file.
+    ///
+    /// # Example
+    /// ```
+    /// let mut file = std::fs::File::open("/tmp/file.gk1k").expect("Failed to open");
+    /// let preset = gk1000_controller::Preset::load_from_file(&mut file).expect("Failed to load");
+    /// ```
+    ///
+    /// # Errors
+    /// If this function fails a `LoadPresetError` will be returned
     pub fn load_from_file(_file: &mut File) -> Result<Self, LoadPresetError> {
         let mut buffer: Vec<u8> = vec![];
         match _file.read_to_end(&mut buffer) {
@@ -71,7 +107,19 @@ impl Preset {
         }
     }
 
-    pub(crate) fn _decode_from_buffer(buffer: &mut VecDeque<u8>) -> Result<Self, LoadPresetError> {
+    /// Function to load a preset from a buffer.
+    ///
+    /// This function is not supposed to be used to load presets from a file
+    ///
+    /// # Example
+    /// ```
+    /// let mut buffer: std::collections::VecDeque<u8> = gk1000_controller::Preset::default()._encode_to_buffer().expect("Failed to Save").into();
+    /// let preset = gk1000_controller::Preset::_decode_from_buffer(&mut buffer).expect("Failed to decode");
+    /// ```
+    ///
+    /// # Errors
+    /// If this function fails a `LoadPresetError` will be returned
+    pub fn _decode_from_buffer(buffer: &mut VecDeque<u8>) -> Result<Self, LoadPresetError> {
         let mut save: Preset = Default::default();
 
         if buffer.pop_front() != Some(MAGIC_NUMBER_1) || buffer.pop_front() != Some(MAGIC_NUMBER_2)
