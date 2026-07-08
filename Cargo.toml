@@ -4,7 +4,7 @@ authors = ["vextrixes"]
 description = "Simple libary to control the CZC gk1000 keyboard"
 repository = "https://github.com/vextrixes/gk1000-controller"
 license = "Unlicense"
-version = "1.0.2"
+version = "1.1.0"
 edition = "2024"
 
 [dependencies]
