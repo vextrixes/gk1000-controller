@@ -7,6 +7,9 @@ license = "Unlicense"
 version = "1.1.0"
 edition = "2024"
 
+[lib]
+doctest = false
+
 [dependencies]
 hidapi = "2.6.6"
 
