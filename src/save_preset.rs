@@ -60,11 +60,11 @@ impl Preset {
     /// # Errors
     /// If this function fails a `SavePresetError` will be returned
     pub fn _encode_to_buffer(&self) -> Result<Vec<u8>, SavePresetError> {
-        let effect_info: EffectInfo = EFFECTS[usize::from(self.effect.to_u8() - 1)].clone();
+        let effect_info: EffectInfo = EFFECTS[self.effect.to_u8() as usize - 1].clone();
         let mut buffer: Vec<u8> = vec![MAGIC_NUMBER_1, MAGIC_NUMBER_2, VERSION];
 
         buffer
-            .push(self.effect.to_u8() + (u8::from(self.full_color) * 128) + (self.direction * 32)); //Effect id, full_color, and direction in a single byte
+            .push(self.effect.to_u8() + self.full_color as u8 * 128 + self.direction * 32); //Effect id, full_color, and direction in a single byte
 
         if !self.full_color && effect_info.can_set_color {
             buffer.extend(&self.color.to_array());
@@ -145,7 +145,7 @@ impl Preset {
         let effect_id: u8 = effect_byte & 0b0001_1111;
 
         save.effect = Effects::from_u8(effect_id).ok_or(LoadPresetError::InvalidOrCorruptedFile)?;
-        let effect_info: EffectInfo = EFFECTS[usize::from(save.effect.to_u8() - 1)].clone();
+        let effect_info: EffectInfo = EFFECTS[save.effect.to_u8() as usize - 1].clone();
 
         if !save.full_color && effect_info.can_set_color {
             save.color.red = buffer

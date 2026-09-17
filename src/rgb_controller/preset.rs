@@ -2,6 +2,7 @@ use crate::Color;
 use crate::EFFECTS;
 use crate::EffectInfo;
 use crate::Effects;
+use crate::RGBController;
 
 #[derive(PartialEq, Debug)]
 pub struct Preset {
@@ -69,5 +70,11 @@ impl Default for Preset {
             Default::default(),
             Default::default(),
         )
+    }
+}
+
+impl Preset {
+    pub fn apply_to_device(&self, mut controller: RGBController) -> Result<Preset, crate::HidWrapperError>{
+        controller.set_effect(self.effect.clone(), self.color.clone(), self.full_color, self.brightness, self.speed, self.direction, self.keymap)
     }
 }
